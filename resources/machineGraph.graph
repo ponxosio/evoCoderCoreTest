@@ -1,0 +1,7 @@
+digraph G {
+1 [image="\Img\continuous_inlet.png"];
+2 [image="\Img\continuous_flow.png"];
+3 [image="\Img\sink.png"];
+1->2;
+2->3;
+}

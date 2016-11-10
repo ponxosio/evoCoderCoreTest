@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/machineGraph.graph</file>
+        <file>resources/timeProtocol.graph</file>
+        <file>resources/timeProtocol.json</file>
+        <file>resources/log.ini</file>
+        <file>resources/machineGraph.json</file>
+        <file>resources/exMachine.json</file>
+        <file>resources/pythonPlugins/basePlugins/control.py</file>
+        <file>resources/pythonPlugins/basePlugins/extractor.py</file>
+        <file>resources/pythonPlugins/basePlugins/injector.py</file>
+        <file>resources/pythonPlugins/basePlugins/light.py</file>
+        <file>resources/pythonPlugins/basePlugins/mixer.py</file>
+        <file>resources/pythonPlugins/basePlugins/odsensor.py</file>
+        <file>resources/pythonPlugins/basePlugins/temperature.py</file>
+        <file>resources/pythonPlugins/EVOPROG/EVOPROG_dummyInjector.py</file>
+        <file>resources/pythonPlugins/EVOPROG/EVOPROG_odsensor.py</file>
+        <file>resources/pythonPlugins/EVOPROGv2/evoprog4wayvalve.py</file>
+        <file>resources/pythonPlugins/EVOPROGv2/evoprogv2pump.py</file>
+        <file>resources/turbidostatProtocol.json</file>
+        <file>resources/bioBlocksProtocol.json</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,12 @@
+digraph G {
+0[label="loadContainer(1, 65)"];
+1[ label ="loop(actualTime <= 60000)"];
+2[label="setContinousFlow(1, 2, 0.001)"];
+3[label="setContinousFlow(2, 3, 0.001)"];
+4[label="TimeStep()"];
+0->1[label = "true"];
+1->2[label = "actualTime <= 60000"];
+2->3[label = "true"];
+3->4[label = "true"];
+4->1[label = "true"];
+}

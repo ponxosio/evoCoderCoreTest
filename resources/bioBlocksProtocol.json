@@ -1,0 +1,114 @@
+{
+	"refs": {
+		"A": {
+			"id": "A",
+			"volume": "2",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"B": {
+			"id": "B",
+			"volume": "2",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"C": {
+			"id": "C",
+			"volume": "0.0",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"D": {
+			"id": "D",
+			"volume": "0",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"E": {
+			"id": "E",
+			"volume": "0",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"F": {
+			"id": "F",
+			"volume": "0",
+			"store": {
+				"where": "Ambient"
+			}
+		},
+		"G": {
+			"id": "G",
+			"volume": "0",
+			"store": {
+				"where": "Ambient"
+			}
+		}
+	},
+	"instructions": [{
+		"op": "pipette",
+		"time_of_operation": "0:minute",
+		"duration": "30:minute",
+		"groups": [{
+			"continuous transfer": {
+				"from": [{
+					"well": " A",
+					"flow rate": " 1:milliliter/hours",
+					"continuous mixing": " FALSE"
+				}, {
+					"well": " B",
+					"flow rate": " 1:milliliter/hours",
+					"continuous mixing": " FALSE"
+				}],
+				"to": "C"
+			}
+		}]
+	}, {
+		"op": "pipette",
+		"time_of_operation": "0:minute",
+		"duration": "30:minute",
+		"groups": [{
+			"continuous transfer": {
+				"from": "C",
+				"to": [{
+					"well": " D",
+					"flow rate": " 1:milliliter/hours",
+					"continuous mixing": " FALSE"
+				}, {
+					"well": " E",
+					"flow rate": " 1:milliliter/hours",
+					"continuous mixing": " FALSE"
+				}]
+			}
+		}]
+	}, {
+		"op": "pipette",
+		"time_of_operation": "30:minute",
+		"duration": "30:minute",
+		"groups": [{
+			"continuous transfer": {
+				"from": "D",
+				"to": "F",
+				"flow rate": " 2:milliliter/hours",
+				"continuous mixing": " FALSE"
+			}
+		}]
+	}, {
+		"op": "pipette",
+		"time_of_operation": "30:minute",
+		"duration": "30:minute",
+		"groups": [{
+			"continuous transfer": {
+				"from": "E",
+				"to": "G",
+				"flow rate": " 2:milliliter/hours",
+				"continuous mixing": " FALSE"
+			}
+		}]
+	}]
+}
