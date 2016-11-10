@@ -19,5 +19,6 @@
         <file>resources/pythonPlugins/EVOPROGv2/evoprogv2pump.py</file>
         <file>resources/turbidostatProtocol.json</file>
         <file>resources/bioBlocksProtocol.json</file>
+        <file>resources/bioBlocksTranslated.json</file>
     </qresource>
 </RCC>
