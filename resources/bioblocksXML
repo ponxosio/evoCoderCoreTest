@@ -1,0 +1,223 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="experiment" id="c+z8}2InU4?x839+Vzzm" x="-105" y="-349">
+    <field name="experimentName">insert name</field>
+    <statement name="inputOfExperiment">
+      <block type="step" id="T1x=~`75[kiOH^O(I-bj">
+        <field name="step">1</field>
+        <statement name="inputOfExperiment">
+          <block type="pipette" id="L%s9kEs%n{rSUikCdgY4">
+            <mutation typepipette="4" typecontinuoustransfer="3" duration="30" duration_units="minutes"></mutation>
+            <field name="pipetteTypeName">4</field>
+            <field name="timeOfOperation">0</field>
+            <field name="timeOfOperation_units">minutes</field>
+            <field name="setting_check_box">FALSE</field>
+            <field name="DURATION">30</field>
+            <field name="Unit_Time">minutes</field>
+            <field name="pipetteTypeName0">3</field>
+            <value name="source">
+              <block type="containerList" id="(#VnW5IX:Ao4lgo]4t?z">
+                <mutation contlistoptionvalue="2"></mutation>
+                <field name="contListOptionValue">2</field>
+                <value name="contListOptionValueNum1">
+                  <block type="container" id="JF5=sA#X247.6^@#MSy|">
+                    <mutation id="JF5=sA#X247.6^@#MSy|" containername="A" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="1" last_parent="PIPETTE" last_operation="43" last_type="5"></mutation>
+                    <field name="containerName">A</field>
+                    <field name="container_type_global">5</field>
+                    <field name="initial_volume">100</field>
+                    <field name="initial_volume_unit">milliliter</field>
+                    <field name="Destiny">Ambient</field>
+                    <field name="continuousmixing">FALSE</field>
+                    <field name="flowrate_units_volume">milliliter</field>
+                    <field name="flowrate_units_time">minutes</field>
+                    <value name="flowrate">
+                      <block type="math_number" id="Gsm9#o9U/XX,/I)5PV3$">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="contListOptionValueNum2">
+                  <block type="container" id="b%a3:-a_vQ1}.b,/1/,d">
+                    <mutation id="b%a3:-a_vQ1}.b,/1/,d" containername="B" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="1" last_parent="PIPETTE" last_operation="43" last_type="5"></mutation>
+                    <field name="containerName">B</field>
+                    <field name="container_type_global">5</field>
+                    <field name="initial_volume">100</field>
+                    <field name="initial_volume_unit">milliliter</field>
+                    <field name="Destiny">Ambient</field>
+                    <field name="continuousmixing">FALSE</field>
+                    <field name="flowrate_units_volume">milliliter</field>
+                    <field name="flowrate_units_time">minutes</field>
+                    <value name="flowrate">
+                      <block type="math_number" id="+vu9`9^q7Tqb78yGJ0os">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="destination">
+              <block type="container" id="kQcl^a|2H-.1eKYbD3h|">
+                <mutation id="kQcl^a|2H-.1eKYbD3h|" containername="C" destiny="Ambient" last_parent="PIPETTE" last_operation="43" last_type="1"></mutation>
+                <field name="containerName">C</field>
+                <field name="container_type_global">1</field>
+                <field name="initial_volume">0.0</field>
+                <field name="initial_volume_unit">milliliter</field>
+                <field name="Destiny">Ambient</field>
+              </block>
+            </value>
+            <next>
+              <block type="pipette" id="U:$k6P8}r?pr$KA/UDz9">
+                <mutation typepipette="4" typecontinuoustransfer="2" duration="30" duration_units="minutes"></mutation>
+                <field name="pipetteTypeName">4</field>
+                <field name="timeOfOperation">0</field>
+                <field name="timeOfOperation_units">minutes</field>
+                <field name="setting_check_box">FALSE</field>
+                <field name="DURATION">30</field>
+                <field name="Unit_Time">minutes</field>
+                <field name="pipetteTypeName0">2</field>
+                <value name="source">
+                  <block type="container" id="9r8TyOxCMd^p9Iz-YP2k">
+                    <mutation id="9r8TyOxCMd^p9Iz-YP2k" containername="C" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" last_parent="PIPETTE" last_operation="42" last_type="1"></mutation>
+                    <field name="containerName">C</field>
+                    <field name="container_type_global">1</field>
+                    <field name="initial_volume">0.0</field>
+                    <field name="initial_volume_unit">milliliter</field>
+                    <field name="Destiny">Ambient</field>
+                  </block>
+                </value>
+                <value name="destination">
+                  <block type="containerList" id="^?kNGR0@E7iNvS_!8=W[">
+                    <mutation contlistoptionvalue="2"></mutation>
+                    <field name="contListOptionValue">2</field>
+                    <value name="contListOptionValueNum1">
+                      <block type="container" id="@YGhlYF!w.mPrV^@oDw_">
+                        <mutation id="@YGhlYF!w.mPrV^@oDw_" containername="D" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="1" last_parent="PIPETTE" last_operation="42" last_type="1"></mutation>
+                        <field name="containerName">D</field>
+                        <field name="container_type_global">1</field>
+                        <field name="initial_volume">0.0</field>
+                        <field name="initial_volume_unit">milliliter</field>
+                        <field name="Destiny">Ambient</field>
+                        <field name="continuousmixing">FALSE</field>
+                        <field name="flowrate_units_volume">milliliter</field>
+                        <field name="flowrate_units_time">minutes</field>
+                        <value name="flowrate">
+                          <block type="math_number" id="1:{blgV`8fYlGqmO?S[u">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="contListOptionValueNum2">
+                      <block type="container" id="]dZfk8_^/,6J21yF_0TY">
+                        <mutation id="]dZfk8_^/,6J21yF_0TY" containername="E" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="1" last_parent="PIPETTE" last_operation="42" last_type="1"></mutation>
+                        <field name="containerName">E</field>
+                        <field name="container_type_global">1</field>
+                        <field name="initial_volume">0.0</field>
+                        <field name="initial_volume_unit">milliliter</field>
+                        <field name="Destiny">Ambient</field>
+                        <field name="continuousmixing">FALSE</field>
+                        <field name="flowrate_units_volume">milliliter</field>
+                        <field name="flowrate_units_time">minutes</field>
+                        <value name="flowrate">
+                          <block type="math_number" id="QuubW6VM{QUme_ML*.Q(">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="step" id="gNy;Anr3-$ft60[,F=wV">
+            <field name="step">2</field>
+            <statement name="inputOfExperiment">
+              <block type="pipette" id="_.6qU]q:8Uh/l+3x56O[">
+                <mutation typepipette="4" typecontinuoustransfer="1" duration="30" duration_units="minutes"></mutation>
+                <field name="pipetteTypeName">4</field>
+                <field name="timeOfOperation">30</field>
+                <field name="timeOfOperation_units">minutes</field>
+                <field name="setting_check_box">FALSE</field>
+                <field name="DURATION">30</field>
+                <field name="Unit_Time">minutes</field>
+                <field name="pipetteTypeName0">1</field>
+                <value name="source">
+                  <block type="container" id="u9Sfm`cW[1d(`lyzgb=f">
+                    <mutation id="u9Sfm`cW[1d(`lyzgb=f" containername="D" destiny="Ambient" last_parent="PIPETTE" last_operation="41" last_type="1"></mutation>
+                    <field name="containerName">D</field>
+                    <field name="container_type_global">1</field>
+                    <field name="initial_volume">0.0</field>
+                    <field name="initial_volume_unit">milliliter</field>
+                    <field name="Destiny">Ambient</field>
+                  </block>
+                </value>
+                <value name="destination">
+                  <block type="container" id="+[t8Ufn---!2%X,q)4R2">
+                    <mutation id="+[t8Ufn---!2%X,q)4R2" containername="F" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="2" last_parent="PIPETTE" last_operation="41" last_type="1"></mutation>
+                    <field name="containerName">F</field>
+                    <field name="container_type_global">1</field>
+                    <field name="initial_volume">0.0</field>
+                    <field name="initial_volume_unit">milliliter</field>
+                    <field name="Destiny">Ambient</field>
+                    <field name="continuousmixing">FALSE</field>
+                    <field name="flowrate_units_volume">milliliter</field>
+                    <field name="flowrate_units_time">minutes</field>
+                    <value name="flowrate">
+                      <block type="math_number" id=")cM+ki[iCFgG9(?i=;L`">
+                        <field name="NUM">2</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="pipette" id="FBeb=8ayN|UXvoTaO2`{">
+                    <mutation typepipette="4" typecontinuoustransfer="1" duration="30" duration_units="minutes"></mutation>
+                    <field name="pipetteTypeName">4</field>
+                    <field name="timeOfOperation">30</field>
+                    <field name="timeOfOperation_units">minutes</field>
+                    <field name="setting_check_box">FALSE</field>
+                    <field name="DURATION">30</field>
+                    <field name="Unit_Time">minutes</field>
+                    <field name="pipetteTypeName0">1</field>
+                    <value name="source">
+                      <block type="container" id="ARfS;^zzSqi~PnMQGIV+">
+                        <mutation id="ARfS;^zzSqi~PnMQGIV+" containername="E" destiny="Ambient" last_parent="PIPETTE" last_operation="41" last_type="1"></mutation>
+                        <field name="containerName">E</field>
+                        <field name="container_type_global">1</field>
+                        <field name="initial_volume">0.0</field>
+                        <field name="initial_volume_unit">milliliter</field>
+                        <field name="Destiny">Ambient</field>
+                      </block>
+                    </value>
+                    <value name="destination">
+                      <block type="container" id="x@Ms:-SNa{~}_ma;KJ%2">
+                        <mutation id="x@Ms:-SNa{~}_ma;KJ%2" containername="G" destiny="Ambient" continuousmixing="FALSE" flowrate_unit_volume="null" flowrate_unit_time="null" flowrate="2" last_parent="PIPETTE" last_operation="41" last_type="1"></mutation>
+                        <field name="containerName">G</field>
+                        <field name="container_type_global">1</field>
+                        <field name="initial_volume">0.0</field>
+                        <field name="initial_volume_unit">milliliter</field>
+                        <field name="Destiny">Ambient</field>
+                        <field name="continuousmixing">FALSE</field>
+                        <field name="flowrate_units_volume">milliliter</field>
+                        <field name="flowrate_units_time">minutes</field>
+                        <value name="flowrate">
+                          <block type="math_number" id="gS)1.9jp$B[ve;n!J=Bm">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
