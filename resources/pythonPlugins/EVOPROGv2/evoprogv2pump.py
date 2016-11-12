@@ -7,6 +7,7 @@ class EvoprogV2Pump(Extractor):
 		self.address = int(params["address"]);
 		self.dir = int(params["direction"]);
 		self.config = False;
+		self.actualRate = -1;
 
 	@classmethod
 	def getParamsType(cls):
@@ -39,12 +40,16 @@ class EvoprogV2Pump(Extractor):
 			communications.synch()
 		
 		if rate > 0:
-			command = "P " + str(self.address) + " " + str(rate) + "\r"
-			communications.sendString(command)
-			print command
-			communications.synch()
+			if self.actualRate != rate:
+				command = "P " + str(self.address) + " " + str(rate) + "\r"
+				communications.sendString(command)
+				print command
+				communications.synch()
+				self.actualRate = rate
 		else:
-			command = "pPump " + str(self.address) + "\r"
-			communications.sendString(command)
-			print command
-			communications.synch()
+			if self.actualRate != 0:
+				command = "pPump " + str(self.address) + "\r"
+				communications.sendString(command)
+				print command
+				communications.synch()
+				self.actualRate = 0
