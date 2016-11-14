@@ -655,7 +655,11 @@ void GraphTest::testExecutionEngine() {
 
 void GraphTest::testBioBlocksJSONReader() {
     try {
-        std::shared_ptr<ProtocolGraph> translated(BioBlocksJSONReader::GetInstance()->loadFile("bioBlocksProtocol.json"));
+        BioBlocksJSONReader reader("bioBlocksProtocol.json", 1000);
+
+        std::shared_ptr<ProtocolGraph> translated = reader.getProtocol();
+        translated->printProtocol("protocolTranslated.graph");
+
         QTemporaryDir temp;
         if (temp.isValid()) {
             QString pathTranslatedJSON = temp.path() + "/translatedProtocol.json";
