@@ -128,6 +128,9 @@ private Q_SLOTS:
     void testMappingEngineFails();
 
     void testExecutionEngine();
+    void testParseVolume();
+    void testParseTime();
+    void testParseFlow();
     void testBioBlocksJSONReader();
 
     void cleanupTestCase();
@@ -694,6 +697,27 @@ void GraphTest::testBioBlocksJSONReader() {
     } catch (std::exception & e) {
         QFAIL(std::string("exeception while executing, " + std::string(e.what())).c_str());
     }
+}
+
+void GraphTest::testParseVolume() {
+    BioBlocksJSONReader reader("bioBlocksProtocol.json", 1000);
+    std::string volumeStr = "5:milliliter";
+    double volumeValue = reader.parseVolume(volumeStr);
+    QVERIFY2(volumeValue == 5, std::string("time value : " + patch::to_string(volumeValue)).c_str());
+}
+
+void GraphTest::testParseTime() {
+    BioBlocksJSONReader reader("bioBlocksProtocol.json", 1000);
+    std::string timeStr = "5:hours";
+    double timeValue = reader.parseTime(timeStr);
+    QVERIFY2(timeValue == 1.8e+7, std::string("time value : " + patch::to_string(timeValue)).c_str());
+}
+
+void GraphTest::testParseFlow() {
+    BioBlocksJSONReader reader("bioBlocksProtocol.json", 1000);
+    std::string flowStr = "900:milliliter/hours";
+    double flowValue = reader.parseFlowRate(flowStr);
+    QVERIFY2(flowValue == (900/3.6e+6), std::string("flow value : " + patch::to_string(flowValue)).c_str());
 }
 
 MachineGraph* GraphTest::makeTurbidostatSketch() {
