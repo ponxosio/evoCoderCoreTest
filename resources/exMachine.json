@@ -493,7 +493,8 @@
                                                         "data": {
                                                             "cereal_class_version": 1,
                                                             "idSource": 1,
-                                                            "idTarget": 5
+                                                            "idTarget": 5,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }
@@ -513,7 +514,8 @@
                                                         "id": 2147483673,
                                                         "data": {
                                                             "idSource": 2,
-                                                            "idTarget": 5
+                                                            "idTarget": 5,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 },
@@ -523,7 +525,8 @@
                                                         "id": 2147483674,
                                                         "data": {
                                                             "idSource": 2,
-                                                            "idTarget": 3
+                                                            "idTarget": 3,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }
@@ -543,7 +546,8 @@
                                                         "id": 2147483676,
                                                         "data": {
                                                             "idSource": 3,
-                                                            "idTarget": 6
+                                                            "idTarget": 6,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }
@@ -563,7 +567,8 @@
                                                         "id": 2147483678,
                                                         "data": {
                                                             "idSource": 4,
-                                                            "idTarget": 6
+                                                            "idTarget": 6,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }
@@ -583,7 +588,8 @@
                                                         "id": 2147483680,
                                                         "data": {
                                                             "idSource": 5,
-                                                            "idTarget": 7
+                                                            "idTarget": 7,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }
@@ -603,7 +609,8 @@
                                                         "id": 2147483682,
                                                         "data": {
                                                             "idSource": 6,
-                                                            "idTarget": 7
+                                                            "idTarget": 7,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 },
@@ -613,7 +620,8 @@
                                                         "id": 2147483683,
                                                         "data": {
                                                             "idSource": 6,
-                                                            "idTarget": 2
+                                                            "idTarget": 2,
+                                                            "allowedPreviousEdge": []
                                                         }
                                                     }
                                                 }

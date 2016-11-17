@@ -1,0 +1,622 @@
+{
+    "refs": {
+        "NaOH": {
+            "id": "NaOH", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        },
+        "Chemo1": {
+            "id": "Chemo1", 
+            "volume": "0.0", 
+            "store": { "where": "Ambient" }
+        },
+        "cellstat": {
+            "id": "cellstat", 
+            "volume": "0.0", 
+            "store": { "where": "Ambient" }
+        },
+        "waste": {
+            "id": "waste", 
+            "volume": "0.0", 
+            "store": { "where": "Ambient" }
+        },
+        "Chemo2": {
+            "id": "Chemo2", 
+            "volume": "0.0", 
+            "store": { "where": "Ambient" }
+        },
+        "Ethanol": {
+            "id": "Ethanol", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        },
+        "Water": {
+            "id": "Water", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        },
+        "cleaningWaste": {
+            "id": "cleaningWaste", 
+            "volume": "0.0", 
+            "store": { "where": "Ambient" }
+        },
+        "Air": {
+            "id": "Air", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        },
+        "Media1": {
+            "id": "Media1", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        },
+        "Media2": {
+            "id": "Media2", 
+            "volume": "1500", 
+            "store": { "where": "Ambient" }
+        }
+      },
+        "instructions": [
+{
+"op": "pipette",
+"time_of_operation":"0:minutes",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "NaOH" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"0:minutes",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"0:minutes",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"400:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "NaOH" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"400:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"400:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"800:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Ethanol" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"800:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"800:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Ethanol" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Water" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"1600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"2400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Water" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"2400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"2400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "NaOH" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Ethanol" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"3600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"4400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Water" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"4400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"4400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"5200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "NaOH" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"5200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"5600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Ethanol" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"5600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"6400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Water" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"6400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"7200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "NaOH" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"7200:seconds",
+"duration":"400:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"7600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Ethanol" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"7600:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"8400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Water" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"8400:seconds",
+"duration":"800:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cleaningWaste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"9200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Air" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"9200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"9200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"11200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Media1" 
+                        ,"to": "Chemo1" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"11200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo1" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"11200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"13200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Air" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"13200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"13200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"15200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Media2" 
+                        ,"to": "Chemo2" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"15200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "Chemo2" 
+                        ,"to": "cellstat" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+                },
+{
+"op": "pipette",
+"time_of_operation":"15200:seconds",
+"duration":"2000:seconds",
+"groups" : [{ "continuous transfer" :{ 
+                        "from": "cellstat" 
+                        ,"to": "waste" 
+                             ,"flow rate": " 900:milliliter/hours" 
+                               ,"continuous mixing": " FALSE" 
+            }}]
+        }
+    ]
+}
