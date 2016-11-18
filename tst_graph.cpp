@@ -142,6 +142,9 @@ private Q_SLOTS:
     void testEdgeHash();
     void testProtocolFlowAnanlisys();
 
+    void testMappingEngineConditionalFlowEdge();
+    void testExecutionEngineConditionalFlowEdge();
+
     void cleanupTestCase();
     void cleanup();
 
@@ -150,8 +153,12 @@ private:
      MachineGraph* makeTurbidostatSketch();
      MachineGraph* makeComplexSketch();
      MachineGraph* makeImposibleSketch();
+     MachineGraph* makeEvoprogSketch();
      ProtocolGraph* makeTimeProtocol();
      ExecutableMachineGraph* makeMappingMachine(int communications,
+                                                std::unique_ptr<CommandSender> exec,
+                                                std::unique_ptr<CommandSender> test);
+     ExecutableMachineGraph* makeEvoprogMachine(int communications,
                                                 std::unique_ptr<CommandSender> exec,
                                                 std::unique_ptr<CommandSender> test);
 
@@ -563,7 +570,8 @@ void GraphTest::testMappingEngineDone() {
         std::shared_ptr<ExecutableMachineGraph> machine(makeMappingMachine(com, std::move(comEx), std::move(comTest)));
         MappingEngine* map = new MappingEngine(sketch, machine);
 
-        QVERIFY2(map->startMapping(), "mapping turbidostat cannot be done");
+        MappingEngine::FlowSet emptySet;
+        QVERIFY2(map->startMapping(emptySet), "mapping turbidostat cannot be done");
 
         std::unordered_set<int> usedNodes;
         std::unordered_set<std::string> usedEdges;
@@ -581,7 +589,7 @@ void GraphTest::testMappingEngineDone() {
 
         MachineGraph::ContainerEdgeVector edges(*sketch->getGraph()->getEdgeList().get());
         for (MachineGraph::ContainerEdgePtr edge: edges) {
-            ExecutableMachineGraph::ExecutableContainerFlow* flow = map->getMappedEdge(edge);
+            ExecutableMachineGraph::FlowType* flow = map->getMappedEdge(edge);
             if (usedEdges.find(flow->toText()) == usedEdges.end()) {
                 usedEdges.insert(flow->toText());
             } else {
@@ -603,7 +611,7 @@ void GraphTest::testMappingEngineDone() {
 
         map = new MappingEngine(sketch, machine2);
 
-        QVERIFY2(map->startMapping(), "mapping complex cannot be done");
+        QVERIFY2(map->startMapping(emptySet), "mapping complex cannot be done");
 
         MachineGraph::ContainerNodeVector nodesC(*sketch->getGraph()->getAllNodes().get());
         for (MachineGraph::ContainerNodePtr node: nodesC) {
@@ -618,7 +626,7 @@ void GraphTest::testMappingEngineDone() {
 
         MachineGraph::ContainerEdgeVector edgesC(*sketch->getGraph()->getEdgeList().get());
         for (MachineGraph::ContainerEdgePtr edge: edgesC) {
-            ExecutableMachineGraph::ExecutableContainerFlow* flow = map->getMappedEdge(edge);
+            ExecutableMachineGraph::FlowType* flow = map->getMappedEdge(edge);
             if (usedEdges.find(flow->toText()) == usedEdges.end()) {
                 usedEdges.insert(flow->toText());
             } else {
@@ -643,7 +651,8 @@ void GraphTest::testMappingEngineFails() {
         std::shared_ptr<ExecutableMachineGraph> machine(makeMappingMachine(com, std::move(comEx), std::move(comTest)));
         MappingEngine* map = new MappingEngine(sketch, machine);
 
-        QVERIFY2(!map->startMapping(), "mapping imposible have being done when should not");
+        MappingEngine::FlowSet emptySet;
+        QVERIFY2(!map->startMapping(emptySet), "mapping imposible have being done when should not");
     } catch (exception & e) {
         QFAIL(std::string("exception while executing test, " + std::string(e.what())).c_str());
     }
@@ -833,6 +842,87 @@ void GraphTest::testFlowAppend() {
     QVERIFY2(f1.toText().compare("1->7:1->2;2->3;3->4;4->5;5->6;6->7;") == 0, std::string("unexpected f1 text; calculated: " + f1.toText() + ", expected:  1->7:1->2;2->3;3->4;4->5;5->6;6->7;").c_str());
 }
 
+void GraphTest::testMappingEngineConditionalFlowEdge() {
+    try {
+        QTemporaryDir tempDir;
+        if (tempDir.isValid()) {
+            std::unique_ptr<CommandSender> comEx = std::unique_ptr<CommandSender>(new SerialSender("\\\\.\\COM3"));
+            std::unique_ptr<CommandSender> comTest = std::unique_ptr<CommandSender>(new FileSender("test.log", "inputFileData.txt"));
+            int com = CommunicationsInterface::GetInstance()->addCommandSender(comEx->clone());
+            ExecutableMachineGraph* evoporgMachine = makeEvoprogMachine(com, std::move(comEx), std::move(comTest));
+
+            evoporgMachine->printMachine("evoMachine.graph");
+
+            std::string pathExMachine = QString(tempDir.path() + "/exMachine.json").toUtf8().constData();
+            ExecutableMachineGraph::toJSON(pathExMachine, *evoporgMachine);
+
+            ExecutionServer* server = ExecutionServer::GetInstance();
+            string machineRef = ExecutionMachineServer::GetInstance()->addNewMachine(pathExMachine);
+
+            BioBlocksJSONReader reader("BioBlocksCleaning.json", 200000);
+            std::shared_ptr<ProtocolGraph> protocol = reader.getProtocol();
+
+            string ref = server->addProtocolOnExistingMachine(protocol, machineRef);
+
+            std::shared_ptr<ExecutionEngine> engine = server->getEvoCoder(ref);
+            engine->sketcher();
+            engine->analizeFlows();
+            engine->getMapping()->doMapping();
+
+            const std::unordered_map<std::string, int> nameIdSketchMap = reader.getContainerMap();
+            MappingEngine* mappingEngine = engine->getMapping()->getMappingEngine();
+
+            int cont = nameIdSketchMap.find("Chemo1")->second;
+            QVERIFY2(mappingEngine->getMappedContainerId(cont) == 2, "chemo1 mapped wrong");
+
+            cont = nameIdSketchMap.find("Chemo2")->second;
+            QVERIFY2(mappingEngine->getMappedContainerId(cont) == 3, "chemo2 mapped wrong");
+
+            cont = nameIdSketchMap.find("cellstat")->second;
+            QVERIFY2(mappingEngine->getMappedContainerId(cont) == 4, "cellstat mapped wrong");
+
+            cont = nameIdSketchMap.find("waste")->second;
+            QVERIFY2(mappingEngine->getMappedContainerId(cont) == 5, "waste mapped wrong");
+
+            cont = nameIdSketchMap.find("cleaningWaste")->second;
+            QVERIFY2(mappingEngine->getMappedContainerId(cont) == 6, "cleaningWaste mapped wrong");
+        } else {
+            QFAIL("Qt error: cannot create temporary directory");
+        }
+
+    } catch(std::exception & e) {
+        QFAIL(std::string("exeception while executing, " + std::string(e.what())).c_str());
+    }
+}
+
+void GraphTest::testExecutionEngineConditionalFlowEdge() {
+    try {
+        QTemporaryDir tempDir;
+        if (tempDir.isValid()) {
+            std::unique_ptr<CommandSender> comEx = std::unique_ptr<CommandSender>(new SerialSender("\\\\.\\COM3"));
+            std::unique_ptr<CommandSender> comTest = std::unique_ptr<CommandSender>(new FileSender("test.log", "inputFileData.txt"));
+            int com = CommunicationsInterface::GetInstance()->addCommandSender(comEx->clone());
+            ExecutableMachineGraph* evoporgMachine = makeEvoprogMachine(com, std::move(comEx), std::move(comTest));
+
+            evoporgMachine->printMachine("evoMachine.graph");
+
+            std::string pathExMachine = QString(tempDir.path() + "/exMachine.json").toUtf8().constData();
+            ExecutableMachineGraph::toJSON(pathExMachine, *evoporgMachine);
+
+            ExecutionServer* server = ExecutionServer::GetInstance();
+            string machineRef = ExecutionMachineServer::GetInstance()->addNewMachine(pathExMachine);
+
+            string ref = server->addBioBlocksProtocolOnExistingMachine("BioBlocksCleaning.json", machineRef, 200000);
+            server->test(ref);
+        } else {
+            QFAIL("Qt error: cannot create temporary directory");
+        }
+
+    } catch(std::exception & e) {
+        QFAIL(std::string("exeception while executing, " + std::string(e.what())).c_str());
+    }
+}
+
 MachineGraph* GraphTest::makeTurbidostatSketch() {
     MachineGraph* sketch = new MachineGraph("sketchTurbidostat");
 
@@ -936,18 +1026,18 @@ ExecutableMachineGraph* GraphTest::makeMappingMachine(int communications,
     std::unordered_map<std::string, std::string> paramso = {{"pinNumber","14"}};
     std::shared_ptr<ODSensor> sensor(new ODSensorPlugin(communications, "sensor1", "EvoprogOdSensor", paramso));
 
-    ExecutableMachineGraph::ExecutableContainerNodePtr cInlet1 = std::make_shared<InletContainer>(1, 100.0, cExtractor);
-    ExecutableMachineGraph::ExecutableContainerNodePtr cInlet2 = std::make_shared<DivergentSwitchSink>(2, 100.0, dummyInjector, cExtractor, control);
-    ExecutableMachineGraph::ExecutableContainerNodePtr cInlet3 = std::make_shared<FlowContainer>(3, 100.0, cExtractor, dummyInjector);
-    ExecutableMachineGraph::ExecutableContainerNodePtr cInlet4 = std::make_shared<InletContainer>(4, 100.0, cExtractor);
+    ExecutableMachineGraph::NodePtr cInlet1 = std::make_shared<InletContainer>(1, 100.0, cExtractor);
+    ExecutableMachineGraph::NodePtr cInlet2 = std::make_shared<DivergentSwitchSink>(2, 100.0, dummyInjector, cExtractor, control);
+    ExecutableMachineGraph::NodePtr cInlet3 = std::make_shared<FlowContainer>(3, 100.0, cExtractor, dummyInjector);
+    ExecutableMachineGraph::NodePtr cInlet4 = std::make_shared<InletContainer>(4, 100.0, cExtractor);
 
 
-    ExecutableMachineGraph::ExecutableContainerNodePtr cSwtInlet5 = std::make_shared<ConvergentSwitchInlet>(5, 100.0,
+    ExecutableMachineGraph::NodePtr cSwtInlet5 = std::make_shared<ConvergentSwitchInlet>(5, 100.0,
                                                                                                             dummyInjector, cExtractor, control);
-    ExecutableMachineGraph::ExecutableContainerNodePtr cSwtInlet6 = std::make_shared<BidirectionalSwitch>(6, 100.0,
+    ExecutableMachineGraph::NodePtr cSwtInlet6 = std::make_shared<BidirectionalSwitch>(6, 100.0,
                                                                                                           cExtractor, dummyInjector, control, control);
     cSwtInlet6->setOd(sensor);
-    ExecutableMachineGraph::ExecutableContainerNodePtr cSwich7 = std::make_shared<ConvergentSwitch>(7, 100.0, dummyInjector, control);
+    ExecutableMachineGraph::NodePtr cSwich7 = std::make_shared<ConvergentSwitch>(7, 100.0, dummyInjector, control);
 
     machine->addContainer(cInlet1);
     machine->addContainer(cInlet2);
@@ -957,7 +1047,7 @@ ExecutableMachineGraph* GraphTest::makeMappingMachine(int communications,
     machine->addContainer(cSwtInlet6);
     machine->addContainer(cSwich7);
 
-    ExecutableMachineGraph::ExecutableContainerEdgeVector allowed;
+    ConditionalFlowEdge::AllowedEdgeSet allowed;
     machine->connectExecutableContainer(1, 5, allowed);
     machine->connectExecutableContainer(2, 5, allowed);
     machine->connectExecutableContainer(3, 6, allowed);
@@ -968,6 +1058,123 @@ ExecutableMachineGraph* GraphTest::makeMappingMachine(int communications,
     machine->connectExecutableContainer(2, 3, allowed);
 
     return machine;
+}
+
+ExecutableMachineGraph* GraphTest::makeEvoprogMachine(int communications,
+                                                      std::unique_ptr<CommandSender> exec,
+                                                      std::unique_ptr<CommandSender> test)
+{
+    ExecutableMachineGraph* machine = new ExecutableMachineGraph(
+                "mappingMachine", std::move(exec), std::move(test));
+
+    std::unordered_map<std::string, std::string> paramsc = {{"address","46"},
+                                                            {"closePos","0"}};
+    std::shared_ptr<Control> control(
+                new ControlPlugin(communications,"v1", "Evoprog4WayValve", paramsc));
+
+    std::unordered_map<std::string, std::string> paramse = {{"address","7"},
+                                                            {"direction","0"}};
+    std::shared_ptr<Extractor> cExtractor(
+                new ExtractorPlugin(communications,"p1", "EvoprogV2Pump", paramse));
+
+    std::unordered_map<std::string, std::string> paramsi;
+    std::shared_ptr<Injector> dummyInjector(
+                new InjectorPlugin(communications, "dummy", "EvoprogDummyInjector", paramsi));
+
+    ExecutableMachineGraph::NodePtr vMedia1 = std::make_shared<InletContainer>(0, 100.0, cExtractor);
+    ExecutableMachineGraph::NodePtr vMedia2 = std::make_shared<InletContainer>(1, 100.0, cExtractor);
+
+    ExecutableMachineGraph::NodePtr chemo1 = std::make_shared<BidirectionalSwitch>(2, 100.0, cExtractor, dummyInjector, control, control);
+    ExecutableMachineGraph::NodePtr chemo2 = std::make_shared<BidirectionalSwitch>(3, 100.0, cExtractor, dummyInjector, control, control);
+    ExecutableMachineGraph::NodePtr cell = std::make_shared<BidirectionalSwitch>(4, 100.0, cExtractor, dummyInjector, control, control);
+
+    ExecutableMachineGraph::NodePtr waste = std::make_shared<ConvergentSwitch>(5, 100.0, dummyInjector, control);
+    ExecutableMachineGraph::NodePtr cleaning = std::make_shared<ConvergentSwitch>(6, 100.0, dummyInjector, control);
+
+    ExecutableMachineGraph::NodePtr naOH = std::make_shared<DivergentSwitch>(9, 100.0, cExtractor, control);
+    ExecutableMachineGraph::NodePtr ethanol = std::make_shared<DivergentSwitch>(10, 100.0, cExtractor, control);
+    ExecutableMachineGraph::NodePtr water = std::make_shared<DivergentSwitch>(11, 100.0, cExtractor, control);
+    ExecutableMachineGraph::NodePtr air = std::make_shared<DivergentSwitch>(12, 100.0, cExtractor, control);
+
+    machine->addContainer(vMedia1);
+    machine->addContainer(vMedia2);
+    machine->addContainer(chemo1);
+    machine->addContainer(chemo2);
+    machine->addContainer(cell);
+    machine->addContainer(waste);
+    machine->addContainer(cleaning);
+    machine->addContainer(naOH);
+    machine->addContainer(ethanol);
+    machine->addContainer(water);
+    machine->addContainer(air);
+
+    ConditionalFlowEdge::AllowedEdgeSet allAllowed;
+    machine->connectExecutableContainer(0, 2, allAllowed);
+    machine->connectExecutableContainer(1, 3, allAllowed);
+    machine->connectExecutableContainer(2, 4, allAllowed);
+    machine->connectExecutableContainer(2, 5, allAllowed);
+    machine->connectExecutableContainer(2, 6, allAllowed);
+    machine->connectExecutableContainer(3, 4, allAllowed);
+    machine->connectExecutableContainer(3, 5, allAllowed);
+    machine->connectExecutableContainer(3, 6, allAllowed);
+    machine->connectExecutableContainer(4, 5, allAllowed);
+
+    ConditionalFlowEdge::AllowedEdgeSet onlyChemo2Allowed;
+    onlyChemo2Allowed.insert(machine->getEdge(3,4));
+    machine->connectExecutableContainer(4, 6, onlyChemo2Allowed);
+
+    machine->connectExecutableContainer(9, 2, allAllowed);
+    machine->connectExecutableContainer(9, 3, allAllowed);
+    machine->connectExecutableContainer(10, 2, allAllowed);
+    machine->connectExecutableContainer(10, 3, allAllowed);
+    machine->connectExecutableContainer(11, 2, allAllowed);
+    machine->connectExecutableContainer(11, 3, allAllowed);
+    machine->connectExecutableContainer(12, 2, allAllowed);
+    machine->connectExecutableContainer(12, 3, allAllowed);
+
+    return machine;
+}
+
+MachineGraph* GraphTest::makeEvoprogSketch()  {
+    MachineGraph* sketch = new MachineGraph("sketchTurbidostat");
+
+    std::shared_ptr<ContainerNodeType> inlet(new ContainerNodeType(MovementType::irrelevant, ContainerType::inlet));
+    std::shared_ptr<ContainerNodeType> convergentSwitch(new ContainerNodeType(MovementType::irrelevant, ContainerType::convergent_switch));
+    std::shared_ptr<ContainerNodeType> bidirectionalT(new ContainerNodeType(MovementType::continuous, ContainerType::bidirectional_switch));
+    std::shared_ptr<ContainerNodeType> divergentSwitch(new ContainerNodeType(MovementType::continuous, ContainerType::divergent_switch));
+
+    sketch->addContainer(0, inlet, 100.0);
+    sketch->addContainer(1, inlet, 100.0);
+    sketch->addContainer(9, divergentSwitch, 100.0);
+    sketch->addContainer(10, divergentSwitch, 100.0);
+    sketch->addContainer(11, divergentSwitch, 100.0);
+    sketch->addContainer(12, divergentSwitch, 100.0);
+    sketch->addContainer(2, bidirectionalT, 100.0);
+    sketch->addContainer(3, bidirectionalT, 100.0);
+    sketch->addContainer(4, bidirectionalT, 100.0);
+    sketch->addContainer(5, convergentSwitch, 100.0);
+    sketch->addContainer(6, convergentSwitch, 100.0);
+
+    sketch->connectContainer(0, 2);
+    sketch->connectContainer(1, 3);
+    sketch->connectContainer(2, 4);
+    sketch->connectContainer(2, 5);
+    sketch->connectContainer(2, 6);
+    sketch->connectContainer(3, 4);
+    sketch->connectContainer(3, 5);
+    sketch->connectContainer(3, 6);
+    sketch->connectContainer(4, 5);
+    sketch->connectContainer(4, 6);
+    sketch->connectContainer(9, 2);
+    sketch->connectContainer(9, 3);
+    sketch->connectContainer(10, 2);
+    sketch->connectContainer(10, 3);
+    sketch->connectContainer(11, 2);
+    sketch->connectContainer(11, 3);
+    sketch->connectContainer(12, 2);
+    sketch->connectContainer(12, 3);
+
+    return sketch;
 }
 
 ProtocolGraph* GraphTest::makeTimeProtocol()
